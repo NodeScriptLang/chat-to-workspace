@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from 'react';
 import {
     Button,
@@ -10,9 +12,11 @@ import {
 } from "@/components/ui/all"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { redirect } from 'next/navigation'
+import { useSearchParams } from 'next/navigation';
 
 export function LoginForm() {
-    const queryParams = new URLSearchParams(window.location.search);
+    const queryParams = useSearchParams();
 
     const [workspaceId, setWorkspaceId] = useState(queryParams.get('workspaceId'));
     const [assistantId, setAssistantId] = useState(queryParams.get('assistantId'));
@@ -23,7 +27,7 @@ export function LoginForm() {
         const res = await (await fetch('/api/login', { method: 'POST', body: JSON.stringify(body), headers: { 'content-type': 'application/json' }, credentials: 'include' })).json();
 
         if (res.success) {
-            window.location.href = '/';
+            redirect("/")
         }
     }
 

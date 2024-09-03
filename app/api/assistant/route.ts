@@ -4,7 +4,9 @@ import OpenAI from "openai";
 import fetch from 'node-fetch';
 import { getSession } from "@/lib/session";
 
-const openai = new OpenAI();
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY || "NO_KEY",
+});
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;

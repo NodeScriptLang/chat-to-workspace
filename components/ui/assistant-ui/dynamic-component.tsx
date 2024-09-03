@@ -13,7 +13,8 @@ interface DynamicComponentLoaderProps {
 }
 
 // Adjust the type of shadCNComponents to accommodate different component types
-const shadCNComponents: Record<string, React.ComponentType<any> | React.ForwardRefExoticComponent<any> | React.FC<any>> = { ...Components.Components };
+// const shadCNComponents: Record<string, React.ComponentType<any> | React.ForwardRefExoticComponent<any> | React.FC<any>> = { ...Components.Components };
+const shadCNComponents: any = { ...Components.Components };
 
 const DynamicComponentLoader: React.FC<DynamicComponentLoaderProps> = ({ sourceCode }) => {
   const [Component, setComponent] = useState<React.ComponentType<any> | null>(null);
