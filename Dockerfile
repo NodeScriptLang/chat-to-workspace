@@ -17,9 +17,9 @@ FROM base as runner
 WORKDIR /app
 RUN mkdir .next
 
-COPY --from=builder /builder/public ./public
 COPY --from=builder /builder/.next/standalone ./
-COPY --from=builder /builder/.next/static ./.next/static
+#COPY --from=builder /builder/public ./public
+#COPY --from=builder /builder/.next/static ./.next/static
 
 RUN chown -R node:node /app
 USER node
