@@ -15,22 +15,15 @@ import {
   Label,
   Input
 } from "@/components/ui/all";
-import { LoginForm } from "./login-form";
-import { redirect } from 'next/navigation'
-import { useEffect } from 'react';
+import { LoginForm } from "../login-form";
+
 
 export default function Home() {
-  useEffect(() => {
-    const loggedIn = Cookies.get('myapp_session');
-    if (!loggedIn) {
-      redirect('/login');
-    }
-  });
-
   return (
     <main className="h-full">
-      <Thread />
-      <FunctionCall />
+        <div className="flex items-center justify-center min-h-screen">
+            <LoginForm />
+        </div>
     </main>
   );
 }

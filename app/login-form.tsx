@@ -27,7 +27,7 @@ export function LoginForm() {
         const res = await (await fetch('/api/login', { method: 'POST', body: JSON.stringify(body), headers: { 'content-type': 'application/json' }, credentials: 'include' })).json();
 
         if (res.success) {
-            redirect("/")
+            window.location.href = '/';
         }
     }
 

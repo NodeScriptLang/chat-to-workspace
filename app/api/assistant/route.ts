@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
                             })
 
                             const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-                            const text = await res.text();
+                            let text = await res.text();
 
                             let textOrJson:any = text;
 
@@ -83,6 +83,10 @@ export async function POST(req: NextRequest) {
                             
                             const hasHtml = !! (textOrJson.html || textOrJson.react);
 
+                            if (hasHtml) {
+                                text = `HTML was displayed to the user. No need to respond. The HTML was ${textOrJson.html || textOrJson.react}`;
+                            }
+
                             sendDataMessage({
                                 role: "data",
                                 data: {
@@ -90,11 +94,11 @@ export async function POST(req: NextRequest) {
                                     toolCallId: toolCall.id,
                                     result: textOrJson
                                 },
-                            })
+                            });
                             
                             return {
                                 tool_call_id: toolCall.id,
-                                output: hasHtml ? 'HTML displayed to user. No need to respond.' : text
+                                output: text
                             };
                         },
                     )
